@@ -10,8 +10,7 @@ const urlsToCache = [
   "./manifest.json",
   "./css/style.css",
   "./js/profile.js",
-  "./js/edit.js",
-  "./assets/img/profile.png",
+  "./assets/img/profile.webp",
   "./assets/img/offline.gif",
 
   // CDN eksternal (Bootstrap, FontAwesome, dsb)
