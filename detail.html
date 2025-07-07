@@ -4,145 +4,172 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tentang Aplikasi</title>
+  <meta name="description" content="Informasi tentang Profile App, Progressive Web App untuk mengelola profil pengguna secara offline dan responsif." />
 
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
+  
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#0d6efd" />
 
-  <!-- Style -->
+  <!-- Styling -->
   <style>
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #f8f9fa;
+      padding-top: 80px; /* untuk navbar fixed */
     }
-
     .card {
+      border: none;
       border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
     }
-
-    .card-title i {
-      color: #0d6efd;
+    h4, h5 {
+      font-weight: 600;
     }
-
-    h5 i {
-      color: #198754;
-    }
-
-    ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    footer {
-      background-color: #212529;
-      color: #fff;
-      padding: 1rem 0;
-      font-size: 0.875rem;
+    .badge, .code {
+      font-size: 0.85rem;
     }
   </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3 shadow fixed-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">Profile App</a>
+      <a class="navbar-brand fw-bold fs-4" href="#">
+        <i class="bi bi-person-circle me-2"></i>Profile App
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navContent">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link active" href="detail.html">Tentang Aplikasi</a></li>
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" href="index.html">
+              <i class="bi bi-house-door me-1"></i>Beranda
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-semibold" href="detail.html">
+              <i class="bi bi-info-circle me-1"></i>Tentang Aplikasi
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Konten -->
-  <div class="container py-5">
+  <main class="container py-5 flex-grow-1">
     <div class="row justify-content-center">
       <div class="col-lg-8">
-        <div class="card shadow border-0">
-          <div class="card-body">
-            <h2 class="card-title fw-semibold mb-3">
-              <i class="bi bi-info-circle-fill me-2"></i> Tentang Aplikasi
-            </h2>
-            <p class="mb-4">
-              Aplikasi ini dikembangkan sebagai <strong>Progressive Web App (PWA)</strong> yang memungkinkan pengguna untuk <em>membuat, mengedit, dan menyimpan profil</em> secara lokal di browser.
-              Tujuan utamanya adalah memberikan pengalaman yang cepat, ringan, responsif, serta dapat berjalan secara offline.
-            </p>
+        <div class="card shadow border-0 rounded-3">
+          <!-- Header Card -->
+          <div class="bg-primary text-white text-center py-3 rounded-top">
+            <h4 class="mb-0 fw-bold">
+              <i class="bi bi-info-circle-fill me-2"></i>Tentang Aplikasi
+            </h4>
+          </div>
 
-            <h5 class="mt-4"><i class="bi bi-cpu me-2"></i> Teknologi yang Digunakan</h5>
-            <ul>
-              <li><strong>HTML5</strong> – Struktur markup halaman.</li>
-              <li><strong>CSS3</strong> – Gaya dan tata letak visual.</li>
-              <li><strong>Bootstrap 5</strong> – Komponen responsif & sistem grid.</li>
-              <li><strong>JavaScript ES6+</strong> – Logika interaktif & asinkron.</li>
-              <li><strong>IndexedDB</strong> – Penyimpanan data profil secara lokal.</li>
-              <li><strong>localStorage</strong> – Alternatif penyimpanan jika IndexedDB tidak tersedia.</li>
-            </ul>
+          <div class="card-body p-4">
+            <!-- Deskripsi Aplikasi -->
+            <div class="bg-light rounded-2 p-3 mb-4 border-start border-4 border-primary">
+              <p class="mb-0">
+                Aplikasi ini dikembangkan sebagai <span class="badge bg-success">Progressive Web App (PWA)</span> yang memungkinkan pengguna untuk 
+                <strong>membuat, mengedit, dan menyimpan profil</strong> secara lokal di browser. Tujuannya adalah memberikan pengalaman yang cepat, ringan, responsif, serta dapat berjalan secara offline.
+              </p>
+            </div>
 
-            <h5 class="mt-4"><i class="bi bi-phone me-2"></i> Fitur Responsif</h5>
-            <ul>
-              <li>Tampilan adaptif di semua ukuran layar (mobile, tablet, desktop).</li>
-              <li>Penggunaan grid system seperti <code>col-md-4</code> & <code>col-md-8</code>.</li>
-              <li>Meta tag <code>viewport</code> untuk skala layar yang sesuai.</li>
-            </ul>
+            <!-- Teknologi -->
+            <div class="mb-4">
+              <h5 class="text-primary fw-bold mb-3">
+                <i class="bi bi-cpu me-2"></i>Teknologi yang Digunakan
+              </h5>
+              <div class="row g-2">
+                <div class="col-md-6"><div class="bg-light p-2 border rounded">HTML5 – Struktur markup halaman</div></div>
+                <div class="col-md-6"><div class="bg-light p-2 border rounded">CSS3 – Gaya dan tata letak visual</div></div>
+                <div class="col-md-6"><div class="bg-light p-2 border rounded">Bootstrap 5 – Komponen responsif & grid</div></div>
+                <div class="col-md-6"><div class="bg-light p-2 border rounded">JavaScript ES6+ – Logika interaktif</div></div>
+                <div class="col-md-6"><div class="bg-light p-2 border rounded">IndexedDB – Penyimpanan lokal</div></div>
+                <div class="col-md-6"><div class="bg-light p-2 border rounded">localStorage – Alternatif penyimpanan</div></div>
+              </div>
+            </div>
 
-            <h5 class="mt-4"><i class="bi bi-image-fill me-2"></i> Gambar Profil Dinamis</h5>
-            <ul>
-              <li>Pengguna dapat mengunggah gambar profil sendiri.</li>
-              <li>Disimpan secara lokal menggunakan IndexedDB atau localStorage.</li>
-              <li>Efisien berkat atribut <code>loading="lazy"</code>.</li>
-            </ul>
+            <!-- Fitur Responsif -->
+            <div class="mb-4">
+              <h5 class="text-success fw-bold mb-3">
+                <i class="bi bi-phone me-2"></i>Fitur Responsif
+              </h5>
+              <ul class="list-unstyled">
+                <li class="d-flex align-items-center mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Tampilan adaptif semua layar</li>
+                <li class="d-flex align-items-center mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Sistem grid <code class="bg-warning px-1 rounded">col-md-4</code> dan lainnya</li>
+                <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-success me-2"></i>Meta tag <code class="bg-warning px-1 rounded">viewport</code></li>
+              </ul>
+            </div>
 
-            <h5 class="mt-4"><i class="bi bi-cloud-check-fill me-2"></i> PWA (Progressive Web App)</h5>
-            <ul>
-              <li><strong>Service Worker</strong> mendukung mode offline & caching.</li>
-              <li><strong>manifest.json</strong> untuk instalasi ke home screen.</li>
-              <li>Sumber daya dari CDN disimpan untuk akses cepat berikutnya.</li>
-            </ul>
+            <!-- Gambar Profil -->
+            <div class="mb-4">
+              <h5 class="text-warning fw-bold mb-3">
+                <i class="bi bi-image-fill me-2"></i>Gambar Profil Dinamis
+              </h5>
+              <ul class="list-unstyled">
+                <li class="d-flex align-items-center mb-2"><i class="bi bi-upload text-primary me-2"></i>Dapat unggah gambar sendiri</li>
+                <li class="d-flex align-items-center mb-2"><i class="bi bi-database text-primary me-2"></i>Disimpan di IndexedDB</li>
+                <li class="d-flex align-items-center"><i class="bi bi-lightning text-primary me-2"></i>Menggunakan <code class="bg-warning px-1 rounded">loading="lazy"</code></li>
+              </ul>
+            </div>
 
-            <h5 class="mt-4"><i class="bi bi-code-slash me-2"></i> Fungsi <code>loadProfile()</code></h5>
-            <ul>
-              <li>Mengambil data secara asinkron dari IndexedDB.</li>
-              <li>Fallback otomatis ke localStorage jika gagal.</li>
-              <li>Menampilkan nama, username, deskripsi, gambar, dan statistik GitHub pengguna.</li>
-              <li>Gunakan <code>fetch</code> ke API publik GitHub.</li>
-            </ul>
+            <!-- PWA -->
+            <div class="mb-4">
+              <h5 class="text-info fw-bold mb-3">
+                <i class="bi bi-cloud-check-fill me-2"></i>Progressive Web App (PWA)
+              </h5>
+              <ul class="list-unstyled">
+                <li class="d-flex align-items-center mb-2"><i class="bi bi-gear-fill text-info me-2"></i>Service Worker untuk offline</li>
+                <li class="d-flex align-items-center mb-2"><i class="bi bi-file-earmark-code text-info me-2"></i>Manifest untuk instalasi</li>
+                <li class="d-flex align-items-center"><i class="bi bi-speedometer2 text-info me-2"></i>Cache CDN otomatis</li>
+              </ul>
+            </div>
 
-            <a href="index.html" class="btn btn-outline-primary mt-4">
-              <i class="bi bi-arrow-left me-1"></i> Kembali ke Beranda
-            </a>
+            <!-- Fungsi loadProfile -->
+            <div class="mb-4">
+              <h5 class="text-danger fw-bold mb-3">
+                <i class="bi bi-code-slash me-2"></i>Fungsi <code>loadProfile()</code>
+              </h5>
+              <ul class="list-unstyled">
+                <li class="d-flex align-items-center mb-2"><i class="bi bi-arrow-down-circle text-danger me-2"></i>Ambil data dari IndexedDB</li>
+                <li class="d-flex align-items-center mb-2"><i class="bi bi-arrow-repeat text-danger me-2"></i>Fallback ke localStorage</li>
+                <li class="d-flex align-items-center mb-2"><i class="bi bi-display text-danger me-2"></i>Tampilkan nama, gambar, stats</li>
+                <li class="d-flex align-items-center"><i class="bi bi-github text-danger me-2"></i>Gunakan <code class="bg-warning px-1 rounded">fetch</code> ke GitHub</li>
+              </ul>
+            </div>
+
+            <div class="text-center mt-4">
+              <a href="index.html" class="btn btn-primary rounded-pill px-4">
+                <i class="bi bi-arrow-left me-2"></i>Kembali ke Beranda
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
+
 
   <!-- Footer -->
-  <footer class="mt-5">
-    <div class="container text-center">
-      <p class="mb-0">&copy; 2025 Frans. All rights reserved.</p>
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+      <p class="mb-0 small">&copy; 2025 Fransis. Semua hak dilindungi.</p>
     </div>
   </footer>
 
+
+
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('sw.js')
-          .then(reg => console.log('✅ ServiceWorker registered:', reg.scope))
-          .catch(err => console.warn('❌ ServiceWorker failed:', err));
-      });
-    }
-  </script>
+  <script src="js/register-sw.js" defer></script>
 </body>
 </html>

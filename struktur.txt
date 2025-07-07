@@ -1,0 +1,16 @@
+profileApp/
+│
+├─assets/
+│    └─img/
+│       ├─offline.gif
+│       └─profile.png
+├─js/
+│  ├─db.js
+│  └─profile.js
+│ 
+├─detail.html
+├─edit.html
+├─index.html
+├─manifest.json
+├─offline.html
+└─sw.js

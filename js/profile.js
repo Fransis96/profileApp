@@ -1,45 +1,50 @@
+// Jalankan kode setelah seluruh DOM selesai dimuat
 window.addEventListener('DOMContentLoaded', async () => {
   let profil;
 
   try {
-    // Ambil data dari IndexedDB
+    // Coba ambil data profil dari IndexedDB
     profil = await getProfile();
   } catch (err) {
+    // Jika gagal (misal browser tidak mendukung), pakai localStorage
     console.warn("IndexedDB tidak tersedia, fallback ke localStorage");
   }
 
-  // Jika tidak ada di IndexedDB, coba ambil dari localStorage (fallback)
+  // Jika profil tidak ditemukan, isi dengan data default dari localStorage
   if (!profil) {
     profil = {
-      nama: localStorage.getItem('profileNama') || 'Fransis96',
-      github: localStorage.getItem('profileGithub') || 'Fransis96',
-      deskripsi: localStorage.getItem('profileDeskripsi') || 'Mahasiswa yang sedang belajar membuat website responsif menggunakan Bootstrap 5 dan HTML5.',
+      nama: localStorage.getItem('profileNama') || 'User',
+      github: localStorage.getItem('profileGithub') || 'user',
+      deskripsi: localStorage.getItem('profileDeskripsi') || 'Belum ada deskripsi...',
       foto: localStorage.getItem('profileImg'),
     };
   }
 
-  // Update elemen tampilan
-  document.getElementById('profileNama').textContent = profil.nama || 'User';
-  document.getElementById('namaSpan').textContent = profil.nama || 'User';
-  document.getElementById('githubLink').href = `https://github.com/${profil.github || ''}`;
-  document.getElementById('deskripsiText').textContent = profil.deskripsi || '';
+  // Tampilkan data profil ke elemen HTML sesuai ID-nya
+  document.getElementById('profile-name').textContent = profil.nama || 'User';
+  document.getElementById('display-name').textContent = profil.nama || 'User';
+  document.getElementById('profile-desc').textContent = profil.deskripsi || '';
+  document.getElementById('img-profile').src = profil.foto || 'assets/img/profile.png';
+  document.getElementById('img-profile').alt = `Foto profil ${profil.nama || 'User'}`;
+  document.getElementById('profile-username').textContent = profil.github ? `@${profil.github}` : '@username';
 
-  if (profil.foto) {
-    document.getElementById('profileImg').src = profil.foto;
-  }
-
-  // Ambil statistik GitHub
+  // Tautan GitHub
+  const gitLink = document.getElementById('github-link');
   if (profil.github) {
-    fetch(`https://api.github.com/users/${profil.github}`)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('repo-count').textContent = data.public_repos ?? '0';
-        document.getElementById('followers-count').textContent = data.followers ?? '0';
-      })
-      .catch(err => {
-        console.error('Gagal ambil GitHub:', err);
-        document.getElementById('repo-count').textContent = 'N/A';
-        document.getElementById('followers-count').textContent = 'N/A';
-      });
+    gitLink.href = `https://github.com/${profil.github}`;
+    gitLink.title = profil.github;
+
+    try {
+      // Ambil data publik dari GitHub API
+      const res = await fetch(`https://api.github.com/users/${profil.github}`);
+      const data = await res.json();
+      document.getElementById('repo-count').textContent = data.public_repos ?? '0';
+      document.getElementById('followers-count').textContent = data.followers ?? '0';
+    } catch (err) {
+      // Jika gagal ambil data GitHub
+      console.warn('❌ Gagal ambil data GitHub:', err);
+      document.getElementById('repo-count').textContent = 'N/A';
+      document.getElementById('followers-count').textContent = 'N/A';
+    }
   }
 });

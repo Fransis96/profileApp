@@ -1,190 +1,183 @@
 <!DOCTYPE html>
+<!-- Menentukan bahwa dokumen ini menggunakan HTML5 -->
 <html lang="id">
+<!-- Menandakan bahwa bahasa halaman ini adalah Bahasa Indonesia -->
+
 <head>
   <meta charset="UTF-8" />
+  <!-- Mengatur karakter encoding menjadi UTF-8 -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Membuat halaman responsif sesuai ukuran layar perangkat -->
+
   <title>Profile App</title>
+  <!-- Judul tab browser -->
 
-  <!-- Bootstrap -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Menghubungkan library CSS Bootstrap dari CDN -->
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Menghubungkan Bootstrap Icons untuk ikon-ikon -->
 
+  <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json" />
+  <!-- Menghubungkan file manifest PWA -->
+
   <meta name="theme-color" content="#0d6efd" />
+  <!-- Warna tema untuk browser bar saat PWA diinstal -->
+
+  <!-- Database lokal (IndexedDB) -->
   <script src="js/db.js"></script>
+  <!-- Menghubungkan script untuk pengelolaan database lokal -->
 
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
-    }
-
-    .profile-img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #dee2e6;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .card-profile {
-      background: #ffffff;
-      border-radius: 1rem;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.06);
-    }
-
-    .github-stat {
-      background-color: #f1f3f5;
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      font-size: 0.875rem;
-    }
-
-    .btn {
-      border-radius: 0.5rem;
-      font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-      .btn {
-        width: 100%;
-      }
-    }
-  </style>
+  <!-- Service Worker register script -->
+  <script src="js/register-sw.js"></script>
+  <!-- Mendaftarkan Service Worker agar bisa offline -->
 </head>
-<body>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+  <!-- Menggunakan Bootstrap utility untuk membuat tinggi minimum 100vh dan latar belakang terang -->
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-2 shadow-sm">
+    <!-- Navigasi utama dengan latar biru dan bayangan -->
     <div class="container">
-      <a class="navbar-brand fw-semibold" href="#">Profile App</a>
+      <a class="navbar-brand fw-bold" href="#">
+        <!-- Logo dan nama aplikasi -->
+        <i class="bi bi-person-circle me-2"></i>Profile App
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navContent">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link" href="detail.html">Tentang Aplikasi</a></li>
+          <!-- Navigasi menu kanan -->
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">
+              <i class="bi bi-house-door me-1"></i>Beranda
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="detail.html">
+              <i class="bi bi-info-circle me-1"></i>Tentang Aplikasi
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Profil -->
-  <div class="container py-5">
-    <div class="card card-profile p-4 mx-auto" style="max-width: 900px;">
-      <div class="row g-4 align-items-center">
+  <!-- Konten Utama -->
+  <main class="container py-4 flex-grow-1">
+    <div class="card mx-auto shadow border-0 rounded-3 overflow-hidden" style="max-width: 750px;">
+      <!-- Kartu profil dengan bayangan dan desain responsif -->
+      
+      <!-- Header Card -->
+      <div class="bg-primary text-white text-center py-3">
+        <h5 class="mb-0 fw-bold">Profil Pengguna</h5>
+      </div>
+      
+      <div class="card-body p-4">
+        <div class="row g-3 align-items-center">
+          <!-- Baris konten profil, terbagi dua kolom -->
 
-        <!-- Kiri -->
-        <div class="col-md-4 text-center">
-          <img id="img-profile" src="assets/img/profile.svg" alt="Foto Profil" class="profile-img mb-3" loading="lazy">
-          <h5 class="fw-semibold mb-0" id="profile-name">Nama Anda</h5>
-          <p class="text-muted small" id="profile-username">@username</p>
+          <!-- Kolom Kiri -->
+          <div class="col-md-4 text-center">
+            <div class="position-relative d-inline-block mb-3">
+              <!-- Foto profil pengguna -->
+              <img id="img-profile" src="assets/img/profile.png" alt="Foto Profil" class="img-fluid rounded-circle border border-3 border-primary shadow-sm" style="width: 120px; height: 120px; object-fit: cover;" loading="lazy">
+              <!-- Icon status aktif di bawah kanan foto -->
+              <span class="position-absolute bottom-0 end-0 bg-success rounded-circle p-1 border border-2 border-white">
+                <i class="bi bi-check-circle-fill text-white fs-6"></i>
+              </span>
+            </div>
+            <!-- Nama dan username pengguna -->
+            <h5 class="fw-bold mb-1 text-primary" id="profile-name">Nama Anda</h5>
+            <p class="text-muted mb-2 small" id="profile-username">@username</p>
 
-          <div class="mb-3">
-            <a id="github-link" href="#" class="text-dark fs-4" target="_blank" rel="noopener">
-              <i class="fab fa-github"></i>
-            </a>
-          </div>
+            <!-- Tombol link ke GitHub -->
+            <div class="mb-3">
+              <a id="github-link" href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3" target="_blank" rel="noopener">
+                <i class="bi bi-github me-1"></i>GitHub
+              </a>
+            </div>
 
-          <div class="row text-center" id="github-stats">
-            <div class="col-6">
-              <div class="github-stat">
-                <i class="bi bi-journal-code text-primary me-1"></i>
-                <span id="repo-count">0</span> Repo
+            <!-- Statistik GitHub -->
+            <div class="row justify-content-center text-center g-2" id="github-stats">
+              <div class="col-6">
+                <div class="bg-light rounded-2 p-2 border">
+                  <div class="text-primary fs-5 fw-bold">
+                    <i class="bi bi-journal-code"></i>
+                  </div>
+                  <div class="fw-bold" id="repo-count">0</div>
+                  <div class="small text-muted">Repo</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="bg-light rounded-2 p-2 border">
+                  <div class="text-success fs-5 fw-bold">
+                    <i class="bi bi-people-fill"></i>
+                  </div>
+                  <div class="fw-bold" id="followers-count">0</div>
+                  <div class="small text-muted">Pengikut</div>
+                </div>
               </div>
             </div>
-            <div class="col-6">
-              <div class="github-stat">
-                <i class="bi bi-people-fill text-success me-1"></i>
-                <span id="followers-count">0</span> Pengikut
+          </div>
+
+          <!-- Kolom Kanan -->
+          <div class="col-md-8">
+            <!-- Salam dan deskripsi pengguna -->
+            <div class="mb-3">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-emoji-smile-fill text-warning fs-4 me-2"></i>
+                <h5 class="mb-0">Halo, saya <span id="display-name" class="text-primary fw-bold">User</span>!</h5>
+              </div>
+              <div class="bg-light rounded-2 p-3 border-start border-3 border-primary">
+                <p id="profile-desc" class="mb-2">Deskripsi pengguna akan tampil di sini.</p>
+                <p class="text-muted small mb-0">
+                  <i class="bi bi-tag-fill me-1"></i>Tugas PWA
+                </p>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Kanan -->
-        <div class="col-md-8">
-          <div class="mb-3">
-            <h4>Halo, saya <span id="display-name">User</span>!</h4>
-            <p id="profile-desc" class="mb-2">Deskripsi pengguna akan tampil di sini.</p>
-            <p class="text-muted small mb-0">Disusun menggunakan Bootstrap Grid dan Card.</p>
+            <!-- Tombol tindakan -->
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <a href="edit.html" class="btn btn-outline-primary rounded-pill px-3">
+                <i class="bi bi-pencil-square me-1"></i>Edit Profil
+              </a>
+              <a href="detail.html" class="btn btn-primary rounded-pill px-3">
+                <i class="bi bi-info-circle me-1"></i>Tentang Aplikasi
+              </a>
+            </div>
           </div>
 
-          <div class="d-flex flex-wrap gap-3 mt-4">
-            <a href="edit.html" class="btn btn-outline-primary">
-              <i class="bi bi-pencil-square me-1"></i> Edit Profil
-            </a>
-            <a href="detail.html" class="btn btn-primary">
-              <i class="bi bi-info-circle me-1"></i> Tentang Aplikasi
-            </a>
-          </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
 
   <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <!-- Kaki halaman yang tetap di bawah -->
     <div class="container">
-      <p class="mb-0 small">&copy; 2025 Fransis. All rights reserved.</p>
+      <p class="mb-0 small">&copy; 2025 Fransis. Semua hak dilindungi.</p>
     </div>
   </footer>
 
-  <!-- Script -->
+  <!-- Script JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Script Bootstrap untuk fungsi komponen interaktif -->
+
+  <script src="js/profile.js"></script>
+  <!-- Script khusus untuk memuat data profil pengguna -->
+
   <script>
-    async function loadProfile() {
-      let profil;
-      try {
-        profil = await getProfile();
-      } catch {
-        console.warn("❌ IndexedDB tidak tersedia.");
-      }
-
-      if (!profil) {
-        profil = {
-          nama: "User",
-          deskripsi: "Belum ada deskripsi.",
-          github: "",
-          foto: "assets/img/profile.svg",
-        };
-      }
-
-      document.getElementById("profile-name").textContent = profil.nama || "User";
-      document.getElementById("display-name").textContent = profil.nama || "User";
-      document.getElementById("profile-desc").textContent = profil.deskripsi || "";
-      document.getElementById("img-profile").src = profil.foto || "assets/img/profile.svg";
-      document.getElementById("img-profile").alt = `Foto profil ${profil.nama || "User"}`;
-      document.getElementById("profile-username").textContent = profil.github ? `@${profil.github}` : "@username";
-
-      const gitLink = document.getElementById("github-link");
-      if (profil.github) {
-        gitLink.href = `https://github.com/${profil.github}`;
-        gitLink.title = profil.github;
-
-        try {
-          const res = await fetch(`https://api.github.com/users/${profil.github}`);
-          const data = await res.json();
-          document.getElementById("repo-count").textContent = data.public_repos ?? "0";
-          document.getElementById("followers-count").textContent = data.followers ?? "0";
-        } catch (err) {
-          console.warn("❌ Gagal ambil data GitHub:", err);
-          document.getElementById("repo-count").textContent = "N/A";
-          document.getElementById("followers-count").textContent = "N/A";
-        }
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", loadProfile);
-
+    // Pendaftaran Service Worker
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js")
-        .then(reg => console.log("✅ Service Worker terdaftar:", reg.scope))
+        .then(reg => console.log("✔️ Service Worker terdaftar:", reg.scope))
         .catch(err => console.warn("❌ Gagal mendaftar Service Worker:", err));
     }
   </script>
